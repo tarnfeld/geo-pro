@@ -20,7 +20,7 @@ geopro: $(BIN_PATH)
 clean:
 	rm -rf build/
 
-SRC := $(shell find src -type f | grep -iE '.*(ino|h|c|cpp)')
+SRC := $(shell find src -type f | grep -iE '.*(ino|h|c|cpp)$$')
 $(BIN_PATH): $(SRC)
 	mkdir -p build/
 	particle compile photon $(SRC) --saveTo $(BIN_PATH)
