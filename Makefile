@@ -11,7 +11,7 @@ all: deps geopro
 
 .PHONY: deps
 deps:
-	@which particle || npm install particle-cli
+	@which particle >/dev/null || npm install particle-cli
 
 .PHONY: geopro
 geopro: $(BIN_PATH)
@@ -20,7 +20,7 @@ geopro: $(BIN_PATH)
 clean:
 	rm -rf build/
 
-SRC := $(wildcard $(SRC_DIR)/*.cpp)
+SRC := $(shell find src -type f | grep -iE '.*(ino|h|c|cpp)')
 $(BIN_PATH): $(SRC)
 	mkdir -p build/
 	particle compile photon $(SRC) --saveTo $(BIN_PATH)
